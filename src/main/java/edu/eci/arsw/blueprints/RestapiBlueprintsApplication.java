@@ -38,7 +38,7 @@ public class RestapiBlueprintsApplication {
         bluePrints.addNewBlueprint(bp2);
     }
     
-    public static void consultBlueprints() throws BlueprintNotFoundException{
+    public static void consultBlueprints() throws BlueprintNotFoundException,BlueprintPersistenceException{
         Blueprint bp1 = bluePrints.getBlueprint("Jhon", "Blueprint");
         System.out.println(bp1.toString());
         Blueprint bp2 = bluePrints.getBlueprint("Mark", "Home");

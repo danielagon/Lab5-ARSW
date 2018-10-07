@@ -9,6 +9,7 @@ import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import edu.eci.arsw.blueprints.filters.Filter;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class BlueprintsServices {
    
     @Autowired
     BlueprintsPersistence bpp;
+    
+    @Autowired
+    Filter filter;
     
     public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException{
         bpp.saveBlueprint(bp);
@@ -37,9 +41,12 @@ public class BlueprintsServices {
      * @param name blueprint's name
      * @return the blueprint of the given name created by the given author
      * @throws BlueprintNotFoundException if there is no such blueprint
+     * @throws BlueprintPersistenceException if the points were not eliminated
      */
-    public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        return bpp.getBlueprint(author, name);
+    public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException, BlueprintPersistenceException{
+        Blueprint bp = bpp.getBlueprint(author, name);
+        filter.removePoints(bp);
+        return bp;
     }
     
     /**
