@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  *
  * @author danielagonzalez
  */
-@Service
+//@Service
 public class RedundancyFilter implements Filter{
 
     @Override

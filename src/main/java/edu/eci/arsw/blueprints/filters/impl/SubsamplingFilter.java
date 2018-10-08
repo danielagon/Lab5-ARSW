@@ -8,18 +8,29 @@ package edu.eci.arsw.blueprints.filters.impl;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.filters.Filter;
+import edu.eci.arsw.blueprints.model.Point;
+import java.util.LinkedList;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author danielagonzalez
  */
-//@Service
+@Service
 public class SubsamplingFilter implements Filter{
 
     @Override
     public void removePoints(Blueprint bp) throws BlueprintPersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Point> points = new LinkedList<>(bp.getPoints());
+        List<Point> newPoints = new LinkedList<>();
+        
+        for (int i=0;i<points.size();i++){
+            if (i%2 == 0){
+                newPoints.add(points.get(i));
+            }
+        }
+        bp.setPoints(newPoints);
     }
     
 }

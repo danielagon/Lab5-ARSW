@@ -29,7 +29,7 @@ public class RestapiBlueprintsApplication {
     }
     
     public static void registerBlueprints() throws BlueprintPersistenceException{
-        Point [] pts1 = new Point [] {new Point(23,45), new Point(40,56)};
+        Point [] pts1 = new Point [] {new Point(23,45), new Point(40,56), new Point(35,17), new Point(35,17), new Point(10,10)};
         Blueprint bp1 = new  Blueprint("Jhon","Blueprint",pts1);
         bluePrints.addNewBlueprint(bp1);
         
@@ -40,9 +40,12 @@ public class RestapiBlueprintsApplication {
     
     public static void consultBlueprints() throws BlueprintNotFoundException,BlueprintPersistenceException{
         Blueprint bp1 = bluePrints.getBlueprint("Jhon", "Blueprint");
-        System.out.println(bp1.toString());
+        System.out.print(bp1.toString()+" Points: ");
+        for (Point p:bp1.getPoints()){
+            System.out.print("["+p.getX()+","+p.getY()+"]");
+        }
         Blueprint bp2 = bluePrints.getBlueprint("Mark", "Home");
-        System.out.println(bp2.toString());
+        System.out.println("\n"+bp2.toString());
     }
     
     public static void consultBlueprintsByAuthor() throws BlueprintNotFoundException,BlueprintPersistenceException{

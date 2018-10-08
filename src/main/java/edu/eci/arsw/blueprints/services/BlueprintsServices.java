@@ -55,7 +55,10 @@ public class BlueprintsServices {
      * @return all the blueprints of the given author
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
-    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException, BlueprintPersistenceException{
+        for (Blueprint bp:bpp.getBlueprintByAuthor(author)){
+            filter.removePoints(bp);
+        }
         return bpp.getBlueprintByAuthor(author); 
     }
     
